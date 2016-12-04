@@ -7,10 +7,10 @@ from math import ceil
 # To Maintain backporing to Python 2.7.12 and Suppoert for 3 libs together
 is_python3 = sys.version_info.major == 3
 if is_python3:
-	from urllib.request import urlopen, Request
+	from urllib.request import urlopen, Request, HTTPError
 	from html.parser import HTMLParser
 else:
-	from urllib2 import urlopen, Request
+	from urllib2 import urlopen, Request, HTTPError
 	from HTMLParser import HTMLParser
 
 # ========================== HTML Parser Class/Functions ========================== #
@@ -130,15 +130,11 @@ def scrape(n=50, sub_dir="topsites", local="global", sub_local=""):
 		except e:
 			print(e.reason)
 
-		try:
-			response = urlopen(request)
-		except e:
-			print(e.reason)
-		
+		response = urlopen(request)
 		for line in response:
-			line = line.decode('utf-8')
+			line = line.decode('utf-8','ignore')
 			page += line
-
+		response.close()
 		# Create a new parser for n links
 		parser = htmlparser(n=n)
 
