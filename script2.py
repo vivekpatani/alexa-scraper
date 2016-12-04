@@ -120,10 +120,14 @@ def scrape(n=50, sub_dir="topsites", local="global", sub_local=""):
 		except e:
 			print(e.reason)
 
-		with urlopen(request) as response:
-			for line in response:
-				line = line.decode('utf-8')
-				page += line
+		try:
+			response = urlopen(request)
+		except e:
+			print(e.reason)
+		
+		for line in response:
+			line = line.decode('utf-8')
+			page += line
 
 		# Create a new parser for n links
 		parser = htmlparser(n=n)
