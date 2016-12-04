@@ -126,7 +126,7 @@ def scrape(n=50, sub_dir="topsites", local="global", sub_local=""):
 			print(e.reason)
 		
 		for line in response:
-			line = line.decode('utf-8')
+			line = line.decode('utf-8','ignore')
 			page += line
 
 		# Create a new parser for n links
