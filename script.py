@@ -110,7 +110,7 @@ def scrape(n=50, sub_dir="topsites", local="global", sub_local=""):
 					"Connection": "keep-alive" }
 
 	# To calculate time for programme to run
-	start = time.clock()
+	start = time.perf_counter()
 
 	# Get the number of pages we need to scrape
 	num_of_pages = calc_number_of_pages(n)
